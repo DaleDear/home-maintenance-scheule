@@ -1,0 +1,11 @@
+.property {
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 0.5rem;
+    padding: 1rem; 
+}
+
+.property-info {
+    color: black;
+    font-family:Georgia, 'Times New Roman', Times, serif
+}

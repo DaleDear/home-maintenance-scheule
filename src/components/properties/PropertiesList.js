@@ -14,7 +14,7 @@ export const PropertiesList = () => {
     return (
         <div>
             {properties.map((propertyObj) => {
-                return <Property property={(propertyObj)} />
+                return <Property property={propertyObj} key={propertyObj.id} />
             })}
         </div>
     )

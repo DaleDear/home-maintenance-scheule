@@ -1,25 +1,23 @@
 //import logo from './logo.svg';
-import { Route, Routes, Outlet } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { InspectionList } from "./components/inspections/InspectionList";
-import { PropertiesList } from "./components/properties/PropertiesList";
-import { NavBar } from "./components/nav/NavBar";
+import { Login } from "./components/auth/Login";
+import { Register } from "./components/auth/Register";
+import { Authorized } from "./views/Authorized";
+import { ApplicationViews } from "./views/ApplicationViews";
+
 
 export const App = () => {
   return (
     <Routes>
-      <Route path="/" element={
-        <>
-          <NavBar />
-          <Outlet />
-        </>
-      }
-      >
-        <Route path="inspections" element={<InspectionList />} />
-        <Route path="properties" element={<PropertiesList />} />
-      </Route>
-    {/* <InspectionList /> */}
-   {/*  <PropertiesList /> */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      
+      <Route path="*" element={
+        <Authorized>
+          <ApplicationViews />
+        </Authorized>
+      } />
   </Routes>
  )}
 

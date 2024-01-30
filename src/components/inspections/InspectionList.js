@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import { getAllInspections } from "../../services/inspectionService"
 import { Inspection } from "./Inspection"
+//import "./Inspection.css"
 
-export const InspectionList = () => {
+export const InspectionList = ({ currentUser }) => {
   const [allInspections, setAllInspections] = useState([])
   const [showInteriorOnly, setShowInteriorOnly] = useState(false)
   const [filteredInspections, setFilteredInspections] = useState([])
-  const [ searchTerm, setSearchTerm] = useState("")
-
+  //const [ searchTerm, setSearchTerm] = useState("")
+  
 
   useEffect(() => {
    getAllInspections().then((inspectionsArray) => {
@@ -25,12 +26,15 @@ export const InspectionList = () => {
     }
   }, [showInteriorOnly, allInspections])
   
-  useEffect(() => {
+
+
+
+ /*  useEffect(() => {
     const foundInspections = allInspections.filter((inspection) =>
       inspection.description.toLowerCase().includes(searchTerm.toLowerCase())
     )
       setFilteredInspections(foundInspections)
-}, [searchTerm, allInspections])
+}, [searchTerm, allInspections]) */
 
   return (
     <div className="inspections-container">
@@ -39,13 +43,17 @@ export const InspectionList = () => {
         <button onClick={() => { setShowInteriorOnly(true) }}>Interior Only</button>
         <button onClick={() => { setShowInteriorOnly(false) }}>Show All</button>
       </div>
-      <div>
+    {/*   <div>
         <input onChange={(event) => { setSearchTerm(event.target.value) }} type="text" placeholder="Search"></input>
-      </div>
+      </div> */}
       <article className="inspections">
         {filteredInspections.map((inspectionObj) => {
           return (
-            <Inspection inspection={inspectionObj} key={inspectionObj.id} />
+            <Inspection
+              inspection={inspectionObj}
+              currentUser={currentUser}
+              key={inspectionObj.id}
+            />
           )
         })}
       </article>

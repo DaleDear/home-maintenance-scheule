@@ -1,0 +1,40 @@
+.user {
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.user-info {
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif
+}
+
+/* .user:hover {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+} */
+
+section.user {
+    margin: 3rem;
+}
+
+.user {
+    background-color: var(--white);
+    border: 1px solid var(--outline);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.user-info {
+    color: var(--info);
+    font-family: "Roboto", sans-serif;
+}
+
+.user-header {
+    font-size: larger;
+    font-weight: 700;
+    line-height: 3rem;
+    color: var(--primary);
+}

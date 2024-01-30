@@ -3,6 +3,7 @@ import { getAllInspections } from "../../services/inspectionService"
 import { Inspection } from "./Inspection"
 //import "./Inspection.css"
 
+
 export const InspectionList = ({ currentUser }) => {
   const [allInspections, setAllInspections] = useState([])
   const [showInteriorOnly, setShowInteriorOnly] = useState(false)

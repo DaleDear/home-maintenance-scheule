@@ -4,6 +4,9 @@ export const Property = ({ property }) => {
     return (
         <div className="property">
             <div>
+                <div className="property-info">Property Id:  {property.id}</div>
+            </div>
+            <div>
                 <div className="property-info">Address:  {property.address}</div>
             </div>
             <div>

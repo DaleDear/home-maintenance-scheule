@@ -12,15 +12,17 @@ export const UserList = () => {
 })
     }, [])
 
-    return (
-        <div className="user">
-            {users.map((userObj) => {
-                return (
-                    <Link to={`/users/${userObj.id}`} key={userObj.id}>
-                        <User user={userObj}/>
-                    </Link>
-                )
-            })}
-        </div>
-    )
+return (
+  <div className="employees">
+    {users.map((userObj) => {
+      return (
+        <Link to={`/users/${userObj.id}`} key={userObj.id}>
+          <User user={userObj} key={userObj.id} />
+        </Link>
+      )
+    })}
+  </div>
+)
+
 }
+

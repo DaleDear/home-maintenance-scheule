@@ -6,6 +6,7 @@ import { PropertiesList } from "../components/properties/PropertiesList"
 import { UserList } from "../components/users/UsersList"
 import { UserDetails } from "../components/users/UserDetails"
 import { useEffect, useState } from "react"
+import { PropertyInspectionList } from "../components/properties/PropertyInspectionList"
 
 
 export const ApplicationViews = () => {
@@ -39,6 +40,15 @@ export const ApplicationViews = () => {
                     <Route index element={<UserList />} />
                     <Route path=":userId" element={<UserDetails />} />
                 </Route>
+                <Route
+                    path="/inspections/:propertyId"
+                    render={({ match }) => (
+                        <PropertyInspectionList
+                        propertyId={match.params.propertyId}
+                        currentUser={currentUser}
+                        />
+                    )}
+                />
             </Route>
         </Routes>
     )

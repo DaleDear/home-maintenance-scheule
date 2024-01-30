@@ -11,7 +11,7 @@ export const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault()
 
-    getUserByEmail(email).then((foundUsers) => {
+    return getUserByEmail(email).then((foundUsers) => {
       if (foundUsers.length === 1) {
         const user = foundUsers[0]
         localStorage.setItem(

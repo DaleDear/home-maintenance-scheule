@@ -8,6 +8,13 @@ export const getUserByEmail = (email) => {
   )
 }
 
+/* export const getUserById = (userId) => {
+  return fetch(`http://localhost:8088/users/${userId}?_embed=properties`).then((res) =>
+    res.json()
+  )
+} */
+
+
 export const createUser = (customer) => {
   return fetch("http://localhost:8088/users", {
     method: "POST",

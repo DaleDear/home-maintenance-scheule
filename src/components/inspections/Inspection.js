@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
 import { getAllProperties } from "../../services/propertyService"
-
 import "./Inspection.css"
-
+import { getPropertiesWithInspections } from "../../services/inspectionService"
 
 export const Inspection = ({ inspection, currentUser }) => {
     const [properties, setProperties] = useState([])
     const [assignedProperty, setAssignedProperty] = useState({})
+    
 
     useEffect(() => {
-        getAllProperties().then((propertiesArray) => {
-            setProperties(propertiesArray)
+        getPropertiesWithInspections().then((propertiesWithInspections) => {
+            setProperties(propertiesWithInspections.properties || [])
         })
     }, [])  
 
@@ -22,6 +22,8 @@ export const Inspection = ({ inspection, currentUser }) => {
         setAssignedProperty(foundProperty)
     }, [properties, inspection]) 
  
+//console.log(assignedProperty)
+
     return (
         <section className="inspection">
               <header className="inspection-info">#{inspection.id}</header>
@@ -38,12 +40,18 @@ export const Inspection = ({ inspection, currentUser }) => {
                   <div>{inspection.interior ? "yes" : "no"}</div>
                 </div>
                 <div className="btn-container">
-                    <button>Maintenance Required</button>
-                    {/* button for logged in user, who is the property owner, to make an inspection as 'maintenance required' */}
+                    {/* <button>Maintenance Required</button> */}
+                    {/* button for logged in user, aka property owner, to mark an inspection as 'maintenance required' */}
+                    {currentUser && !assignedProperty ? (
+                        <button>Maintenance Required</button>
+                    ) : (
+                        ""
+                    )}
                     <button>Mark Complete</button>
-                    {/* button for logged in user, who is the property owner, to mark an inspection as completed */}
-                    {assignedProperty?.userId === currentUser.id && !inspection.dateCompleted ? <button>Mark Complete</button> : ""} 
+                    {/* button for logged in user, aka property owner, to mark an inspection as completed if the dateCompleted field is an empty string*/}
+                    {/* {assignedProperty?.userId === currentUser.id && !inspection.dateCompleted ? <button>Mark Complete</button> : ""}  */}
                     <button>Delete Item</button>
+                    {/* button for logged in user, aka property owner, to delete an inspection */}
                 </div>
               </footer>
             </section>

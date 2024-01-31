@@ -1,0 +1,78 @@
+import { useEffect, useState } from "react"
+import "./Form.css"
+import { getUserById, updateUser } from "../../services/userService"
+import { useNavigate } from "react-router-dom"
+
+
+export const UserForm = ({ currentUser }) => {
+const [user, setUser] = useState({})
+
+const navigate = useNavigate()
+    
+    useEffect(() => {
+        getUserById(currentUser.id).then(data => {
+            const userObj = data[0]
+            setUser(userObj)
+    })
+}, [currentUser.id])
+
+    
+    const handleSave = (event) => {
+        event.preventDefault()
+        console.log("clicked save")
+
+        const editedUser = {
+            id: user.id,
+            fullName: user.fullName,
+            email: user.email,
+            userId: user.userId,
+        }
+
+        updateUser(editedUser).then(() => {
+navigate(`/users/${currentUser.id}`)
+        })
+    }
+    
+    return (
+        <form className="profile">
+            <h2>Update Profile</h2>
+             <fieldset>
+                <div className="form-group">
+                    <label>Name: </label>
+                    <input
+                        type="text"
+                        value={user.fullName}
+                        onChange={(event) => {
+                            const copy = { ...user }
+                            copy.fullName = event.target.value
+                            setUser(copy)
+                        }}
+                        required
+                        className="form-control"
+                    />
+                </div>
+            </fieldset>
+            <fieldset>
+                <div className="form-group">
+                    <label>Email: </label>
+                    <input
+                        type="text"
+                        value={user.email}
+                        onChange={(event) => {
+                            const copy = { ...user }
+                            copy.email = event.target.value
+                            setUser(copy)
+                        }}
+                        required
+                        className="form-control"
+                    />
+                </div>
+            </fieldset>
+             <fieldset>
+                <div className="form-group">
+                    <button className="from-btn btn-primary" onClick={handleSave}>Save Profile</button>
+                </div>
+            </fieldset>
+        </form>
+    )
+}

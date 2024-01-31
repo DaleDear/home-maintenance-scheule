@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getAllInspections } from "../../services/inspectionService"
 import { Inspection } from "./Inspection"
+//import { useParams } from "react-router-dom"
 //import "./Inspection.css"
 
 
@@ -9,6 +10,7 @@ export const InspectionList = ({ currentUser }) => {
   const [showInteriorOnly, setShowInteriorOnly] = useState(false)
   const [filteredInspections, setFilteredInspections] = useState([])
   //const [ searchTerm, setSearchTerm] = useState("")
+  //const [inspectionId] = useParams();
   
 
   useEffect(() => {
@@ -26,8 +28,6 @@ export const InspectionList = ({ currentUser }) => {
       setFilteredInspections(allInspections)
     }
   }, [showInteriorOnly, allInspections])
-  
-
 
 
  /*  useEffect(() => {
@@ -48,12 +48,12 @@ export const InspectionList = ({ currentUser }) => {
         <input onChange={(event) => { setSearchTerm(event.target.value) }} type="text" placeholder="Search"></input>
       </div> */}
       <article className="inspections">
-        {filteredInspections.map((inspectionObj) => {
+        {filteredInspections.map((inspection) => {
           return (
             <Inspection
-              inspection={inspectionObj}
+              inspection={inspection}
               currentUser={currentUser}
-              key={inspectionObj.id}
+              key={inspection.id}
             />
           )
         })}

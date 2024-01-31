@@ -2,12 +2,13 @@ import { useEffect, useState } from "react"
 import { getAllProperties } from "../../services/propertyService"
 import "./Inspection.css"
 import { getPropertiesWithInspections } from "../../services/inspectionService"
+//import { useParams } from "react-router-dom"
 
 export const Inspection = ({ inspection, currentUser }) => {
     const [properties, setProperties] = useState([])
     const [assignedProperty, setAssignedProperty] = useState({})
     
-
+    
     useEffect(() => {
         getPropertiesWithInspections().then((propertiesWithInspections) => {
             setProperties(propertiesWithInspections.properties || [])
@@ -22,6 +23,8 @@ export const Inspection = ({ inspection, currentUser }) => {
         setAssignedProperty(foundProperty)
     }, [properties, inspection]) 
  
+
+    
 //console.log(assignedProperty)
 
     return (

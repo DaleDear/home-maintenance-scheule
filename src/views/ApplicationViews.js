@@ -7,6 +7,7 @@ import { UserList } from "../components/users/UsersList"
 import { UserDetails } from "../components/users/UserDetails"
 import { useEffect, useState } from "react"
 import { PropertyInspectionList } from "../components/properties/PropertyInspectionList"
+import { UserForm } from "../components/forms/UserForm"
 
 
 export const ApplicationViews = () => {
@@ -18,6 +19,8 @@ export const ApplicationViews = () => {
 
         setCurrentUser(honeyUserObject)
     }, [])
+
+
 
     return (
         <Routes>
@@ -41,7 +44,9 @@ export const ApplicationViews = () => {
                     <Route path=":userId" element={<UserDetails />} />
                 </Route>
                 <Route
-                    path="/inspections/:propertyId"
+                    path="/inspections/:propertyId/:inspectionId"
+                    /* element={<PropertyInspectionList />} */
+                    
                     render={({ match }) => (
                         <PropertyInspectionList
                         propertyId={match.params.propertyId}
@@ -50,6 +55,7 @@ export const ApplicationViews = () => {
                     )}
                 />
             </Route>
+            <Route path="profile" element={<UserForm currentUser={currentUser} />} />
         </Routes>
     )
 }

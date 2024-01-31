@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { getPropertiesWithInspections } from "../../services/inspectionService";
 import { Inspection } from "../inspections/Inspection";
+import { useParams } from "react-router-dom";
 
 
-export const PropertyInspectionList = ({ propertyId, currentUser }) => {
+export const PropertyInspectionList = ({ currentUser }) => {
   const [propertyInspections, setPropertyInspections] = useState([]);
+  const { propertyId, inspectionId } = useParams();
 
   useEffect(() => {
-    getPropertiesWithInspections(propertyId).then((inspectionsArray) => {
+    getPropertiesWithInspections(inspectionId).then((inspectionsArray) => {
       setPropertyInspections(inspectionsArray);
     });
-  }, [propertyId]);
+  }, [inspectionId]);
+
+  //window.alert(propertyId)
+  window.alert(inspectionId)
 
   return (
     <div className="property-inspections-container">
       <h2>Inspections for Property {propertyId}</h2>
       <article className="inspections">
-        {propertyInspections.map((inspectionObj) => (
+        {propertyInspections.map((inspection) => (
           <Inspection
-            inspection={inspectionObj}
+            inspection={inspection}
+            property={propertyId}
             currentUser={currentUser}
-            key={inspectionObj.id}
+            key={inspection.id}
           />
         ))}
       </article>

@@ -49,7 +49,7 @@ export const UserDetails = () => {
                     ) : (
                         <div>No properties available</div>
                     )}
-            </div>
+                </div>
             </section>
             {/* <div><Link to={<InspectionList />} /></div> */}
         

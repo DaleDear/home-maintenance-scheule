@@ -7,3 +7,9 @@ export const getPropertiesWithInspections = () => {
 }
 
 // create a fetch call that gets all the properties for a user and embed the inspections
+
+export const deleteInspection = (inspectionId) => {
+    return fetch(`http://localhost:8088/inspections/${inspectionId}`, {
+      method: "DELETE",  
+    })
+}

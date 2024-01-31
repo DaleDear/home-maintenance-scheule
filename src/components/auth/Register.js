@@ -88,7 +88,7 @@ export const Register = (props) => {
                 type="checkbox"
                 id="isStaff"
               />
-              I am an employee{" "}
+              I am a Site Admin{" "}
             </label>
           </div>
         </fieldset>

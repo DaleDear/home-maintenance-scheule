@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import "./NavBar.css"
 import { useNavigate } from "react-router-dom"
 
-export const NavBar = () => {
+export const AdminNavBar = () => {
 const navigate = useNavigate()
 
     return <ul className="navbar">

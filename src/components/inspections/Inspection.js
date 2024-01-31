@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
 import { getAllProperties } from "../../services/propertyService"
 import "./Inspection.css"
-import { getPropertiesWithInspections } from "../../services/inspectionService"
+import { deleteInspection, getPropertiesWithInspections } from "../../services/inspectionService"
 //import { useParams } from "react-router-dom"
 
-export const Inspection = ({ inspection, currentUser }) => {
+
+export const Inspection = ({ inspection, currentUser, getAndSetInspections }) => {
     const [properties, setProperties] = useState([])
     const [assignedProperty, setAssignedProperty] = useState({})
     
@@ -24,6 +25,11 @@ export const Inspection = ({ inspection, currentUser }) => {
     }, [properties, inspection]) 
  
 
+    const handleDelete = () => {
+        deleteInspection(inspection.id).then(() => {
+          getAndSetInspections()
+      })  
+    }
     
 //console.log(assignedProperty)
 
@@ -53,7 +59,11 @@ export const Inspection = ({ inspection, currentUser }) => {
                     <button>Mark Complete</button>
                     {/* button for logged in user, aka property owner, to mark an inspection as completed if the dateCompleted field is an empty string*/}
                     {/* {assignedProperty?.userId === currentUser.id && !inspection.dateCompleted ? <button>Mark Complete</button> : ""}  */}
-                    <button>Delete Item</button>
+                  {/*   <button>Delete Item</button> */}
+                    {!currentUser.isStaff ? (<button className="btn btn-warning" onClick={handleDelete}>Delete</button>
+                    ) : (
+                            ""
+                    )}
                     {/* button for logged in user, aka property owner, to delete an inspection */}
                 </div>
               </footer>

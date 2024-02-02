@@ -14,9 +14,7 @@ export const PropertyInspectionList = ({ currentUser }) => {
     });
   }, [inspectionId]);
 
-  //window.alert(propertyId)
-  window.alert(inspectionId)
-
+  
   return (
     <div className="property-inspections-container">
       <h2>Inspections for Property {propertyId}</h2>

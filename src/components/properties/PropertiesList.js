@@ -11,7 +11,8 @@ export const PropertiesList = ({ currentUser }) => {
             if (currentUser.isStaff) {
             setAllProperties(propertiesArray)
             } else {
-                const userProperties = propertiesArray.filter(property => property.userId === currentUser.id
+                const userProperties = propertiesArray.filter(
+                    (property) => property.userId === currentUser.id
                 
                 )
                 setAllProperties(userProperties)
@@ -24,11 +25,11 @@ export const PropertiesList = ({ currentUser }) => {
         getAndSetProperties()
     }, [currentUser])
 
-    useEffect(() => {
+   /*  useEffect(() => {
         getAllProperties().then(propertyArray => {
         setAllProperties(propertyArray)  
        }) 
-    }, [])
+    }, []) */
 
     return (
         <div>

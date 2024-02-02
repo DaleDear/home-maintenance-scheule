@@ -76,7 +76,7 @@ const navigate = useNavigate()
                             
                         }}
                     >
-                        <option value="" enabled>Make a selection</option>
+                        <option value="" enabled="true">Make a selection</option>
 
                         {userProperties.map((propertyObj) => (
                             <option

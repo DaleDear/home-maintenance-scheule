@@ -33,3 +33,22 @@ export const MarkCompleteInspection = (inspection) => {
         body: JSON.stringify(inspection),
     })
 }
+
+export const MarkMaintenanceRequired = (inspection) => {
+    return fetch(`http://localhost:8088/inspections/${inspection.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(inspection),
+    })
+    /*  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to mark maintenance required');
+    }
+    // You can return additional data if needed
+    return response.json();
+  }); */
+};
+
+

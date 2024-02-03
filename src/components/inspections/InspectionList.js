@@ -8,11 +8,12 @@ import { getAllProperties } from "../../services/propertyService"
 
 export const InspectionList = ({ currentUser }) => {
   const [allInspections, setAllInspections] = useState([])
-  const [showInteriorOnly, setShowInteriorOnly] = useState(false)
+  //const [showInteriorOnly, setShowInteriorOnly] = useState(false)
   const [showOpenOnly, setShowOpenOnly] = useState (false)
   const [filteredInspections, setFilteredInspections] = useState([])
   const [searchTerm, setSearchTerm] = useState("")
   const [allProperties, setAllProperties] = useState([])
+  //const [maintenanceInspections, setMaintenanceInspections] = useState (false)
   
   
   const getAndSetAllProperties = () => {
@@ -65,6 +66,7 @@ export const InspectionList = ({ currentUser }) => {
   }, [])
 
 
+
   /* useEffect(() => {
     if (showInteriorOnly) {
       const interiorInspections = allInspections.filter(inspection => inspection.interior === true)
@@ -73,34 +75,44 @@ export const InspectionList = ({ currentUser }) => {
   }, [showInteriorOnly, allInspections])
  */
 
-  /* useEffect(() => {
+  useEffect(() => {
     const foundInspections = allInspections.filter((inspection) =>
       inspection.description.toLowerCase().includes(searchTerm.toLowerCase())
     )
       setFilteredInspections(foundInspections)
 }, [searchTerm, allInspections]) 
- */
+
   useEffect(() => {
     if (showOpenOnly) {
-      const openInspections = allInspections.filter(inspection => inspection.dateCompleted)
+      const openInspections = allInspections.filter(inspection => !inspection.dateCompleted)
       setFilteredInspections(openInspections)
     } 
   }, [showOpenOnly, allInspections])
+
+ /*  useEffect(() => {
+    if (maintenanceInspections) {
+      const inspectionsForMaintenance = allInspections.filter(inspection => inspection.markCompleted)
+      setMaintenanceInspections(inspectionsForMaintenance)
+  }
+}, [allInspections, maintenanceInspections])
+ */
 
   return (
     <div className="inspections-container">
       <h2>Inspections</h2>
       <InspectionFilterBar  
-        setShowInteriorOnly={setShowInteriorOnly}
+        //setShowInteriorOnly={setShowInteriorOnly}
         setShowOpenOnly={setShowOpenOnly}
+        setAllInspections={setAllInspections}
         setSearchTerm={setSearchTerm} 
+        //setMaintenanceInspections={setMaintenanceInspections}
         currentUser={currentUser}
       />
       <div>
         <input onChange={(event) => { setSearchTerm(event.target.value) }} type="text" placeholder="Search"></input>
       </div> 
       <article className="inspections">
-        {allInspections.map((inspectionObj) => {
+        {filteredInspections.map((inspectionObj) => {
           return (
             <Inspection
               inspection={inspectionObj}

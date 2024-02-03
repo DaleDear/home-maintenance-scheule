@@ -1,6 +1,6 @@
 .inspection {
-    background-color: white;
-    border: 1px solid grey;
+    background-color: rgb(237, 238, 251);
+    border: 2px solid rgb(5, 21, 44);
     border-radius: 0.5rem;
     padding: 1rem;
 }

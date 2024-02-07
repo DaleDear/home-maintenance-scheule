@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getAllProperties } from "../../services/propertyService"
 import "./Inspection.css"
-import { deleteInspection, getPropertiesWithInspections } from "../../services/inspectionService"
+import { MarkCompleteInspection, deleteInspection, getPropertiesWithInspections } from "../../services/inspectionService"
 //import { useParams } from "react-router-dom"
 
 
@@ -24,6 +24,21 @@ export const Inspection = ({ inspection, currentUser, getAndSetInspections }) =>
         setAssignedProperty(foundProperty)
     }, [properties, inspection]) 
  
+    const handleMarkComplete = () => {
+        const completedInspection = {
+            id: inspection.id,
+            userId: inspection.userId,
+            propertyId: inspection.propertyId,
+            description: inspection.description,
+            interior: inspection.interior,
+            season: inspection.season,
+            dateCompleted: new Date(), 
+        }
+        MarkCompleteInspection(completedInspection).then(() => {
+            getAndSetInspections()
+        })
+
+}
 
     const handleDelete = () => {
         deleteInspection(inspection.id).then(() => {
@@ -38,12 +53,12 @@ export const Inspection = ({ inspection, currentUser, getAndSetInspections }) =>
               <header className="inspection-info">#{inspection.id}</header>
               <div>{inspection.description}</div>
               <footer>
-                <div>
-                    <div className="inspection-info">Assigned User</div>
+                {/* <div>
+                    <div className="inspection-info">Assigned Property</div>
                     <div>
-                        {assignedProperty ? assignedProperty.user?.fullName : "None"}
+                        {assignedProperty ? assignedProperty.property?.address : "None"}
                     </div>
-                </div>
+                </div> */}
                 <div>
                   <div className="inspection-info">Interior:</div>
                   <div>{inspection.interior ? "yes" : "no"}</div>
@@ -51,13 +66,17 @@ export const Inspection = ({ inspection, currentUser, getAndSetInspections }) =>
                 <div className="btn-container">
                     {/* <button>Maintenance Required</button> */}
                     {/* button for logged in user, aka property owner, to mark an inspection as 'maintenance required' */}
-                    {currentUser && !assignedProperty ? (
-                        <button>Maintenance Required</button>
+                    {(inspection.userId === currentUser.id || inspection.property.userId === currentUser.id) && !inspection.dateCompleted ? (
+                        <button className="btn btn-primary" onClick={handleMarkComplete}>Mark Completed</button>
                     ) : (
                         ""
                     )}
-                    <button>Mark Complete</button>
-                    {/* button for logged in user, aka property owner, to mark an inspection as completed if the dateCompleted field is an empty string*/}
+                    {/* {inspection?.userId === currentUser.id && !inspection.dateCompleted ? (
+                        <button className="btn btn-primary" onClick={handleMarkComplete}>Mark Complete</button>
+                    ) : (
+                        ""
+                    )} */}
+                    {/* button for logged in user to mark an inspection as completed if the dateCompleted field is an empty string*/}
                     {/* {assignedProperty?.userId === currentUser.id && !inspection.dateCompleted ? <button>Mark Complete</button> : ""}  */}
                   {/*   <button>Delete Item</button> */}
                     {!currentUser.isStaff ? (<button className="btn btn-warning" onClick={handleDelete}>Delete</button>

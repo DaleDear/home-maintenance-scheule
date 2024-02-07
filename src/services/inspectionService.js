@@ -23,3 +23,13 @@ export const createInspection = (inspection) => {
         body: JSON.stringify(inspection),
 })
 }
+
+export const MarkCompleteInspection = (inspection) => {
+    return fetch(`http://localhost:8088/inspections/${inspection.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(inspection),
+    })
+}

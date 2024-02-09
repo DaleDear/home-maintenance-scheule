@@ -8,7 +8,7 @@ import { getAllProperties } from "../../services/propertyService"
 export const InspectionForm = ({currentUser}) => {
     const [inspection, setInspection] = useState({ description: "", season: "", interior: false })
     const [allProperties, setAllProperties] = useState ([])
-const [userProperties, setUserProperties] = useState([])
+    const [userProperties, setUserProperties] = useState([])
 
     useEffect(() => {
         getAllProperties().then((propertiesArray) => {
